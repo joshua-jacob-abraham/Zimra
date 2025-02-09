@@ -1,0 +1,14 @@
+#root{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+body{
+  height: 100vh;
+  background-image: url('/floral-background-phone-size.png');
+  margin: 0px;
+  
+}

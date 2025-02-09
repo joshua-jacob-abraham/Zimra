@@ -1,0 +1,95 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  height: 325px;
+  width: 600px;
+  position: relative;
+}
+
+.envelope-closed {
+  width: 358.5px;
+  height: 230.981px;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.closed-front {
+  position: absolute;
+  filter: drop-shadow(5px 3px 6px rgba(0, 0, 0, 0.2));
+  top: 0px;
+}
+
+.closed-back {
+  bottom: 20px;
+  box-shadow: 5px 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+.envelope-active {
+  position: relative;
+  padding: 0px;
+  margin: 0px;
+  height: 412px;
+}
+
+.open-back {
+  width: 358.5px;
+  height: 412.004px;
+  flex-shrink: 0;
+  filter: drop-shadow(5px 3px 6px rgba(0, 0, 0, 0.2));
+}
+
+.open-front {
+  position: absolute;
+  top: 182px;
+  left: 1px;
+  z-index: 2;
+  width: 357px;
+  height: 230px;
+  flex-shrink: 0;
+}
+
+.letter-mini {
+  position: absolute;
+  left: 68px;
+  top: 199px;
+  z-index: 1;
+  width: 224.291px;
+  height: 141.385px;
+  flex-shrink: 0;
+}
+
+.letter-back {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(32, 27, 27, 0.584);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  opacity: 0;
+  animation: fadeIn 0.3s ease forwards;
+}
+
+.letter {
+  width: 391px;
+  max-width: 90%;
+  aspect-ratio: 391/540;
+  height: 540px;
+  flex-shrink: 0;
+  z-index: 1001;
+  opacity: 0;
+  animation: fadeIn 0.2s ease forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
