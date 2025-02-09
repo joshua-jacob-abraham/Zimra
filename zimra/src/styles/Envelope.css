@@ -5,6 +5,7 @@
   height: 325px;
   width: 600px;
   position: relative;
+  min-width: 390px;
 }
 
 .envelope-closed {

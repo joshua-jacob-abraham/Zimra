@@ -4,11 +4,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow-y: hidden;
 }
 
 body{
   height: 100vh;
   background-image: url('/floral-back.webp');
   margin: 0px;
-  
+  min-width: 390x;
+  overflow-y: hidden;
 }

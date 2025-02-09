@@ -14,26 +14,17 @@ function App() {
     setLetterOpened(!letterOpened);
   };
 
-  useEffect(() => {
-    function handleOutsideClick(event) {
-      if (letterRef.current && !letterRef.current.contains(event.target)) {
-        setLetterOpened(false);
-      }
-    }
+  const handleHeartClick = (event) => {
+    event.stopPropagation();
+    console.log("clicked");
+  };
 
-    if (letterOpened) {
-      document.addEventListener("mousedown", handleOutsideClick);
-      document.addEventListener("touchstart", handleOutsideClick);
-    } else {
-      document.removeEventListener("mousedown", handleOutsideClick);
-      document.removeEventListener("touchstart", handleOutsideClick);
+  const handleOutsideClick = (event) => {
+    if (letterRef.current && !letterRef.current.contains(event.target)) {
+      setLetterOpened(false);
+      setOpened(false);
     }
-
-    return () => {
-      document.removeEventListener("mousedown", handleOutsideClick);
-      document.removeEventListener("touchstart", handleOutsideClick);
-    };
-  }, [letterOpened]);
+  };
 
   return (
     <>
@@ -69,10 +60,18 @@ function App() {
       )}
 
       {letterOpened && (
-        <div className="letter-back">
-          <div className="letterComp">
-            <img ref={letterRef} className="letter" src="/letter.svg" />
-            <img className="heart" src="/heart-stamp.png" />
+        <div className="letter-back" onClick={handleOutsideClick}>
+          <div
+            className="letterComp"
+            ref={letterRef}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <img className="letter" src="/letter.svg" />
+            <img
+              className="heart"
+              src="/heart-stamp.png"
+              onClick={handleHeartClick}
+            />
           </div>
         </div>
       )}
