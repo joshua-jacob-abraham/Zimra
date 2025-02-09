@@ -8,55 +8,89 @@
 }
 
 .envelope-closed {
-  width: 358.5px;
+  width: 357.5px;
   height: 230.981px;
   flex-shrink: 0;
   position: relative;
+  fill: linear-gradient(
+      0deg,
+      rgba(196, 182, 182, 0.41) 0%,
+      rgba(196, 182, 182, 0.41) 100%
+    ),
+    url(<path-to-image>) lightgray 50% / cover no-repeat;
+  stroke-width: 1px;
+  stroke: rgba(147, 119, 90, 0.86);
+  filter: drop-shadow(4px 2px 3px rgba(0, 0, 0, 0.2));
 }
 
 .closed-front {
   position: absolute;
-  filter: drop-shadow(5px 3px 6px rgba(0, 0, 0, 0.2));
   top: 0px;
+  left: -3px;
+  width: 371px;
+  flex-shrink: 0;
 }
 
 .closed-back {
-  bottom: 20px;
-  box-shadow: 5px 3px 6px rgba(0, 0, 0, 0.2);
+  position: absolute;
+  bottom: -5px;
+  width: 358.5px;
+  height: 230.981px;
+  flex-shrink: 0;
+  fill: linear-gradient(
+      0deg,
+      rgba(196, 182, 182, 0.41) 0%,
+      rgba(196, 182, 182, 0.41) 100%
+    ),
+    url("/envelope-cover-texture.webp") lightgray 50% / cover no-repeat;
+  stroke-width: 1px;
+  stroke: rgba(147, 119, 90, 0.86);
+  filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.1));
 }
 
 .envelope-active {
   position: relative;
   padding: 0px;
+  bottom: -13px;
+  left: 3px;
   margin: 0px;
   height: 412px;
 }
 
 .open-back {
-  width: 358.5px;
-  height: 412.004px;
+  width: 378.999px;
+  height: 411px;
   flex-shrink: 0;
-  filter: drop-shadow(5px 3px 6px rgba(0, 0, 0, 0.2));
+  /* filter: drop-shadow(3px 3px 4px rgba(0, 0, 0, 0.2)); */
 }
 
 .open-front {
   position: absolute;
-  top: 182px;
-  left: 1px;
+  top: 172px;
+  left: 8px;
+  fill: linear-gradient(
+      0deg,
+      rgba(196, 182, 182, 0.41) 0%,
+      rgba(196, 182, 182, 0.41) 100%
+    ),
+    url("/envelope-cover-texture.webp") lightgray 50% / cover no-repeat;
+  /* filter: drop-shadow(0px -1px 3px rgba(0, 0, 0, 0.1)); */
   z-index: 2;
-  width: 357px;
-  height: 230px;
+  width: 357.5px;
+  height: 231px;
   flex-shrink: 0;
 }
 
 .letter-mini {
   position: absolute;
-  left: 68px;
+  left: 75px;
   top: 199px;
   z-index: 1;
   width: 224.291px;
   height: 141.385px;
   flex-shrink: 0;
+  transform: translateY(10px);
+  animation: slideUp 0.4s ease-out forwards;
 }
 
 .letter-back {
@@ -74,6 +108,14 @@
   animation: fadeIn 0.3s ease forwards;
 }
 
+.letterComp {
+  position: relative;
+  width: 391px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .letter {
   width: 391px;
   max-width: 90%;
@@ -83,6 +125,17 @@
   z-index: 1001;
   opacity: 0;
   animation: fadeIn 0.2s ease forwards;
+  filter: drop-shadow(3px 5px 6px rgba(0, 0, 0, 0.5));
+}
+
+.heart {
+  position: absolute;
+  z-index: 1002;
+  bottom: 44px;
+  right: 43px;
+  height: 94.074px;
+  aspect-ratio: 87/102;
+
 }
 
 @keyframes fadeIn {
@@ -91,5 +144,14 @@
   }
   to {
     opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(10px);
+  }
+  to {
+    transform: translateY(-18px);
   }
 }

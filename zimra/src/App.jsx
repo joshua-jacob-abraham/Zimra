@@ -41,16 +41,28 @@ function App() {
         <div className="container">
           {!opened && (
             <div className="envelope-closed" onClick={handleClick}>
-              <img className="closed-back" src="/envelope-closed-back.png" />
-              <img className="closed-front" src="/envelope-closed-front.png" />
+              <img
+                className="closed-back"
+                src="/envelope-open-front-textured.svg"
+              />
+              <img
+                className="closed-front"
+                src="/envelope-closed-front-textured-svg.svg"
+              />
             </div>
           )}
 
           {opened && (
             <div className="envelope-active" onClick={handleLetterClick}>
-              <img className="open-back" src="/envelope-open-back.png" />
-              <img className="open-front" src="/envelope-open-front.png" />
-              <img className="letter-mini" src="/letter-mini.png" />
+              <img
+                className="open-back"
+                src="/envelope-open-back-textured.svg"
+              />
+              <img
+                className="open-front"
+                src="/envelope-open-front-textured.svg"
+              />
+              <img className="letter-mini" src="/letter-mini-modified.svg" />
             </div>
           )}
         </div>
@@ -58,7 +70,10 @@ function App() {
 
       {letterOpened && (
         <div className="letter-back">
-          <img ref={letterRef} className="letter" src="/letter.png" />
+          <div className="letterComp">
+            <img ref={letterRef} className="letter" src="/letter.svg" />
+            <img className="heart" src="/heart-stamp.png" />
+          </div>
         </div>
       )}
     </>
