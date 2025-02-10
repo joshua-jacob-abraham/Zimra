@@ -14,12 +14,21 @@ function Envelope() {
   const [imagesLoaded, setImagesLoaded] = useState(false);
   const [showTooltip, setShowTooltip] = useState(false);
 
+  const [showHelp, setShowHelp] = useState(false);
   const letterRef = useRef(null);
   const [modLetter, setModLetter] = useState(false);
 
   const { name1, name2 } = useParams();
   const modName1 = name1 || "Juliet";
   const rom = name2 || "Romeo";
+
+  useEffect(() => {
+    if (!name1) {
+      setShowHelp(true);
+    } else {
+      setShowHelp(false);
+    }
+  }, [name1]);
 
   const capitalizeFirstLetter = (name) => {
     if (!name) return "";
@@ -204,7 +213,7 @@ function Envelope() {
               src="/heart-stamp.png"
               onClick={handleHeartClick}
             />
-  
+
             <p className="the-from">{romeo}</p>
 
             {modLetter && (
@@ -213,6 +222,27 @@ function Envelope() {
               </p>
             )}
           </div>
+        </div>
+      )}
+
+      {showHelp && (
+        <div className="help">
+          <p
+            style={{
+              margin: "0px",
+            }}
+          >
+            https://zimra.netlify.app/to-name/from-name to
+            create your custom card &#9825;
+          </p>
+          <p
+            style={{
+              margin: "0px",
+              marginTop: "5px",
+            }}
+          >
+            Eg: https://zimra.netlify.app/juliet/romeo
+          </p>
         </div>
       )}
     </>
