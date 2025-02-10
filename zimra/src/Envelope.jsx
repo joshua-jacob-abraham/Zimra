@@ -1,4 +1,5 @@
 import { useState, useRef } from "react";
+import domtoimage from "dom-to-image";
 import {
   BrowserRouter as Router,
   Routes,
@@ -28,6 +29,23 @@ function Envelope() {
   const handleHeartClick = (event) => {
     event.stopPropagation();
     console.log("clicked");
+
+    const letterElement = document.querySelector(".letter-comp");
+    if (!letterElement) return;
+
+    domtoimage
+      .toPng(letterElement)
+      .then((dataUrl) => {
+        const a = document.createElement("a");
+        a.href = dataUrl;
+        a.download = `Letter_From_${romeo}_To_${juliet}.png`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      })
+      .catch((error) => {
+        console.error("Error generating image:", error);
+      });
   };
 
   const handleOutsideClick = (event) => {
