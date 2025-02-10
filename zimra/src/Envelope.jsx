@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import domtoimage from "dom-to-image";
 import {
   BrowserRouter as Router,
@@ -11,12 +11,13 @@ import "./styles/Envelope.css";
 function Envelope() {
   const [opened, setOpened] = useState(false);
   const [letterOpened, setLetterOpened] = useState(false);
-  const letterRef = useRef(null);
 
+  const letterRef = useRef(null);
   const { name1, name2 } = useParams();
 
   const juliet = name1 || "Juliet";
-  const romeo = name2 || "Romeo";
+  const rom = name2 || "Romeo";
+  const romeo = "-" + rom;
 
   const handleClick = () => {
     setOpened(!opened);
@@ -28,7 +29,6 @@ function Envelope() {
 
   const handleHeartClick = (event) => {
     event.stopPropagation();
-    console.log("clicked");
 
     const letterElement = document.querySelector(".letter-comp");
     if (!letterElement) return;
@@ -103,8 +103,7 @@ function Envelope() {
               src="/heart-stamp.png"
               onClick={handleHeartClick}
             />
-
-            <p className="the-from">-{romeo}</p>
+            <p className="the-from">{romeo}</p>
           </div>
         </div>
       )}
