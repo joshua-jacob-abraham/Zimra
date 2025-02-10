@@ -85,7 +85,7 @@ function Envelope() {
     if (letterOpened) {
       setTimeout(() => {
         setShowTooltip(true);
-      }, 3000);
+      }, 1500);
 
       setTimeout(() => {
         setShowTooltip(false);
