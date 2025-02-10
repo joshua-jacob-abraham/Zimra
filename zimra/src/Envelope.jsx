@@ -132,11 +132,11 @@ function Envelope() {
     if (letterOpened) {
       setTimeout(() => {
         setShowTooltip(true);
-      }, 1500);
+      }, 2000);
 
       setTimeout(() => {
         setShowTooltip(false);
-      }, 6000);
+      }, 5000);
     }
   }, [letterOpened]);
 
