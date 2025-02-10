@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import domtoimage from "dom-to-image";
+import domtoimage from "dom-to-image-more";
 import {
   BrowserRouter as Router,
   Routes,
@@ -34,7 +34,7 @@ function Envelope() {
     if (!letterElement) return;
 
     domtoimage
-      .toPng(letterElement)
+      .toPng(letterElement, { quality: 1, scale: 2 })
       .then((dataUrl) => {
         const a = document.createElement("a");
         a.href = dataUrl;
