@@ -11,10 +11,10 @@ import "./styles/Envelope.css";
 function Envelope() {
   const [opened, setOpened] = useState(false);
   const [letterOpened, setLetterOpened] = useState(false);
-
+  const [imagesLoaded, setImagesLoaded] = useState(false);
   const letterRef = useRef(null);
-  const { name1, name2 } = useParams();
 
+  const { name1, name2 } = useParams();
   const juliet = name1 || "Juliet";
   const rom = name2 || "Romeo";
   const romeo = "-" + rom;
@@ -55,9 +55,49 @@ function Envelope() {
     }
   };
 
+  const imagePaths = [
+    "/envelope-open-front-textured.svg",
+    "/envelope-closed-front-textured-svg.svg",
+    "/envelope-open-back-textured.svg",
+    "/letter-mini-modified.svg",
+    "/letter.svg",
+    "/heart-stamp.png",
+  ];
+
+  useEffect(() => {
+    let loadedImages = 0;
+
+    imagePaths.forEach((src) => {
+      const img = new Image();
+      img.src = src;
+      img.onload = () => {
+        loadedImages++;
+        if (loadedImages === imagePaths.length) {
+          setImagesLoaded(true);
+          console.log("loaded");
+        }
+      };
+    });
+  }, []);
+
+  if (!imagesLoaded) {
+    return (
+      <p
+        style={{
+          fontFamily: "Cedarville Cursive",
+          fontWeight: "400",
+          fontSize: "16px",
+          fontStyle: "normal",
+        }}
+      >
+        Patient as love &#9825;
+      </p>
+    );
+  }
+
   return (
     <>
-      {!letterOpened && (
+      {!letterOpened && imagesLoaded && (
         <div className="container">
           {!opened && (
             <div className="envelope-closed" onClick={handleClick}>
@@ -90,7 +130,7 @@ function Envelope() {
         </div>
       )}
 
-      {letterOpened && (
+      {letterOpened && imagesLoaded && (
         <div className="letter-back" onClick={handleOutsideClick}>
           <div
             className="letter-comp"
