@@ -12,6 +12,7 @@ function Envelope() {
   const [opened, setOpened] = useState(false);
   const [letterOpened, setLetterOpened] = useState(false);
   const [imagesLoaded, setImagesLoaded] = useState(false);
+  const [showTooltip, setShowTooltip] = useState(false);
   const letterRef = useRef(null);
 
   const { name1, name2 } = useParams();
@@ -80,6 +81,18 @@ function Envelope() {
     });
   }, []);
 
+  useEffect(() => {
+    if (letterOpened) {
+      setTimeout(() => {
+        setShowTooltip(true);
+      }, 3000);
+
+      setTimeout(() => {
+        setShowTooltip(false);
+      }, 6000);
+    }
+  }, [letterOpened]);
+
   if (!imagesLoaded) {
     return (
       <p
@@ -138,6 +151,11 @@ function Envelope() {
             onClick={(e) => e.stopPropagation()}
           >
             <img className="letter" src="/letter.svg" />
+
+            <p className={`tooltip ${showTooltip ? "fade-in" : "fade-out"}`}>
+              Click to save <span className="heart-icon">&#9825;</span>
+            </p>
+
             <img
               className="heart"
               src="/heart-stamp.png"
