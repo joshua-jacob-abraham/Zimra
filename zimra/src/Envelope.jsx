@@ -204,7 +204,7 @@ function Envelope() {
               src="/heart-stamp.png"
               onClick={handleHeartClick}
             />
-
+  
             <p className="the-from">{romeo}</p>
 
             {modLetter && (

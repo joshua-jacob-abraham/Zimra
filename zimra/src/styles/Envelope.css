@@ -167,6 +167,8 @@
   bottom: 22%;
   right: 29%;
   min-width: 96px;
+  white-space: nowrap;
+  display: inline-block;
 }
 
 @keyframes fadeIn {
