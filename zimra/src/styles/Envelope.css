@@ -158,15 +158,15 @@
 .the-from {
   color: #000;
   font-family: "Cedarville Cursive", serif;
-  font-size: 30px;
+  font-size: 28px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
   position: absolute;
   z-index: 1004;
-  bottom: 22%;
-  right: 29%;
-  min-width: 96px;
+  bottom: 24%;
+  right: 5%;
+  min-width: 190px;
   white-space: nowrap;
   display: inline-block;
 }
