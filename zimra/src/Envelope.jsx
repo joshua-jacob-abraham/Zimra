@@ -13,12 +13,22 @@ function Envelope() {
   const [letterOpened, setLetterOpened] = useState(false);
   const [imagesLoaded, setImagesLoaded] = useState(false);
   const [showTooltip, setShowTooltip] = useState(false);
+
   const letterRef = useRef(null);
+  const [modLetter, setModLetter] = useState(false);
 
   const { name1, name2 } = useParams();
-  const juliet = name1 || "Juliet";
+  const modName1 = name1 || "Juliet";
   const rom = name2 || "Romeo";
-  const romeo = "-" + rom;
+
+  const capitalizeFirstLetter = (name) => {
+    if (!name) return "";
+    return name.charAt(0).toUpperCase() + name.slice(1);
+  };
+
+  const juliet = capitalizeFirstLetter(modName1);
+  const modRom = capitalizeFirstLetter(rom);
+  const romeo = "-" + modRom;
 
   const handleClick = () => {
     setOpened(!opened);
@@ -29,6 +39,8 @@ function Envelope() {
   };
 
   const handleHeartClick = (event) => {
+    setModLetter(true);
+    setShowTooltip(false);
     event.stopPropagation();
 
     const letterElement = document.querySelector(".letter-comp");
@@ -39,7 +51,7 @@ function Envelope() {
       .then((dataUrl) => {
         const a = document.createElement("a");
         a.href = dataUrl;
-        a.download = `Letter_From_${romeo}_To_${juliet}.png`;
+        a.download = `Letter_From_${modRom}_To_${juliet}.png`;
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
@@ -53,6 +65,7 @@ function Envelope() {
     if (letterRef.current && !letterRef.current.contains(event.target)) {
       setLetterOpened(false);
       setOpened(false);
+      setModLetter(false);
     }
   };
 
@@ -64,6 +77,31 @@ function Envelope() {
     "/letter.svg",
     "/heart-stamp.png",
   ];
+
+  const getFormattedDate = () => {
+    const date = new Date();
+    const day = date.getDate();
+    const month = date.toLocaleString("en-US", { month: "short" });
+    const year = date.getFullYear();
+
+    const getOrdinal = (num) => {
+      if (num > 3 && num < 21) return "th";
+      switch (num % 10) {
+        case 1:
+          return "st";
+        case 2:
+          return "nd";
+        case 3:
+          return "rd";
+        default:
+          return "th";
+      }
+    };
+
+    return `${day}${getOrdinal(day)} ${month}, ${year}`;
+  };
+
+  const formattedDate = getFormattedDate();
 
   useEffect(() => {
     let loadedImages = 0;
@@ -152,16 +190,28 @@ function Envelope() {
           >
             <img className="letter" src="/letter.svg" />
 
-            <p className={`tooltip ${showTooltip ? "fade-in" : "fade-out"}`}>
-              Click to save <span className="heart-icon">&#9825;</span>
-            </p>
+            {showTooltip && (
+              <p
+                className={`tooltip ${showTooltip ? "fade-in" : "fade-out"}`}
+                onClick={handleHeartClick}
+              >
+                Click to save <span className="heart-icon">&#9825;</span>
+              </p>
+            )}
 
             <img
               className="heart"
               src="/heart-stamp.png"
               onClick={handleHeartClick}
             />
+
             <p className="the-from">{romeo}</p>
+
+            {modLetter && (
+              <p className="the-to mod-to">
+                {juliet} &#9825; {formattedDate}
+              </p>
+            )}
           </div>
         </div>
       )}
