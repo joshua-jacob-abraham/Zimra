@@ -11,6 +11,6 @@ body{
   height: 100vh;
   background-image: url('/floral-back.webp');
   margin: 0px;
-  min-width: 390x;
+  min-width: 390px;
   overflow-y: hidden;
 }

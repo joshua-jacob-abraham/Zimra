@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import domtoimage from "dom-to-image";
 import {
   BrowserRouter as Router,
@@ -11,8 +11,8 @@ import "./styles/Envelope.css";
 function Envelope() {
   const [opened, setOpened] = useState(false);
   const [letterOpened, setLetterOpened] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
   const letterRef = useRef(null);
-
   const { name1, name2 } = useParams();
 
   const juliet = name1 || "Juliet";
@@ -28,7 +28,6 @@ function Envelope() {
 
   const handleHeartClick = (event) => {
     event.stopPropagation();
-    console.log("clicked");
 
     const letterElement = document.querySelector(".letter-comp");
     if (!letterElement) return;
@@ -55,19 +54,43 @@ function Envelope() {
     }
   };
 
+  useEffect(() => {
+    const images = document.querySelectorAll("img");
+    let loadedImages = 0;
+
+    images.forEach((img) => {
+      if (img.complete) {
+        loadedImages++;
+      } else {
+        img.onload = () => {
+          loadedImages++;
+          if (loadedImages === images.length) {
+            setIsLoaded(true);
+          }
+        };
+      }
+    });
+
+    if (loadedImages === images.length) {
+      setIsLoaded(true);
+    }
+  }, []);
+
   return (
     <>
-      {!letterOpened && (
+      {isLoaded && !letterOpened && (
         <div className="container">
           {!opened && (
             <div className="envelope-closed" onClick={handleClick}>
               <img
                 className="closed-back"
                 src="/envelope-open-front-textured.svg"
+                loading="lazy"
               />
               <img
                 className="closed-front"
                 src="/envelope-closed-front-textured-svg.svg"
+                loading="lazy"
               />
             </div>
           )}
@@ -77,12 +100,18 @@ function Envelope() {
               <img
                 className="open-back"
                 src="/envelope-open-back-textured.svg"
+                loading="lazy"
               />
               <img
                 className="open-front"
                 src="/envelope-open-front-textured.svg"
+                loading="lazy"
               />
-              <img className="letter-mini" src="/letter-mini-modified.svg" />
+              <img
+                className="letter-mini"
+                src="/letter-mini-modified.svg"
+                loading="lazy"
+              />
             </div>
           )}
 
@@ -90,20 +119,20 @@ function Envelope() {
         </div>
       )}
 
-      {letterOpened && (
+      {isLoaded && letterOpened && (
         <div className="letter-back" onClick={handleOutsideClick}>
           <div
             className="letter-comp"
             ref={letterRef}
             onClick={(e) => e.stopPropagation()}
           >
-            <img className="letter" src="/letter.svg" />
+            <img className="letter" src="/letter.svg" loading="lazy" />
             <img
               className="heart"
               src="/heart-stamp.png"
+              loading="lazy"
               onClick={handleHeartClick}
             />
-
             <p className="the-from">-{romeo}</p>
           </div>
         </div>
