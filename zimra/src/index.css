@@ -1,4 +1,4 @@
-#root{
+#root {
   width: 100%;
   height: 100%;
   display: flex;
@@ -8,11 +8,12 @@
   overflow-x: hidden;
 }
 
-body{
+body {
   height: 100vh;
-  background-image: url('/floral-back.webp');
+  background-image: url("/floral-back.webp");
   margin: 0px;
   min-width: 390px;
-  overflow-y: hidden;
-  overflow-x: hidden;
+  overflow: hidden;
+  touch-action: pan-x pan-y;
+  -webkit-overflow-scrolling: none;
 }
